@@ -1,0 +1,70 @@
+---
+title: "ACS_Dinkins_Darius"
+output: html_document
+date: '2022-06-23'
+---
+The American Community Survey in 2014 contains 7 columns of data:
+Id:
+Id2:
+PopGroup:
+POPGROUP.display-label:
+RacesReported:
+HSDegree:
+BachDegree:
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+
+setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
+survey_2014 <- read.csv('acs-14-1yr-s0201.csv')
+
+str(survey_2014)
+nrow(survey_2014)
+ncol(survey_2014)
+summary(survey_2014)
+```
+3. Create a Histogram of the HSDegree variable using the ggplot2 package
+  1. Set a bin size for the Histogram
+     Bins determined by sqrt of data points.  Bin Width determined by (max - min) / bins
+  2. Include a Title and appropriate X/Y axis labels on your Histogram Plot.
+  
+```{r histogram, include=FALSE}
+ggplot(survey_2014, aes(x=HSDegree)) + xlab('High School Degrees')  + ylab('Frequency') + geom_histogram(bins = 12, binwidth = 2.85)  
+
+```
+
+4. Answer the following questions based on the Histogram produced:
+  1. Based on what you see in this histogram, is the data distribution unimodal?  
+      Yes, X appears the most in the data set
+      
+  2. Is it approximately symmetrical? 
+     No. a vertical cannot be drawn in such a way that the shape to the left or right are similar.
+     
+  3. Is it approximately bell-shaped?
+     No, it skews toward a negative distribution
+     
+  4. Is it approximately normal?
+     No, it skews toward a negative distribution
+     
+  5. If not normal, is the distribution skewed? If so, in which direction?
+     The data skews toward a negative distribution
+     
+  6. Include a normal curve to the Histogram that you plotted.
+  
+```{r histogram, include=FALSE} 
+  
+ggplot(survey_2014, aes(x=HSDegree)) + geom_histogram(bins = 12, binwidth = 2.85) +
+  xlab('High School Degrees')  + ylab('Frequency') + geom_histogram(bins = 12, binwidth = 2.85)  +
+  geom_density(aes(y = 2.85*..count..))
+
+```
+  
+  
+  7. Explain whether a normal distribution can accurately be used as a model for this data.
+      Normal distribution can not be accurately used as a model for this data.  The data skews in negative manner.  The       majority of the data points exist toward the max.
+      
+5. Create a Probability Plot of the HSDegree variable.
+```{r, include = false} ggplot(survey_2014)
+
+```
+
