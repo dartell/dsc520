@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Assignment: ASSIGNMENT 0
 # Name: Dinkins, Darius
 # Date: 2022-06-13
@@ -50,5 +55,6 @@ class(z)
 
 ## Check the class of the variable class_name using the class() function
 class(class_name)
+
 
 
