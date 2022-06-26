@@ -1,13 +1,13 @@
 # Assignment: ASSIGNMENT 3
 # Name: Dinkins, Darius
-# Date: 2010-02-14
+# Date: 2022-06-21
 
 ## Load the ggplot2 package
 library(ggplot2)
 theme_set(theme_minimal())
 
 ## Set the working directory to the root of your DSC 520 directory
-setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
+setwd("C:/Users/darge/dsc520")
 
 ## Load the `data/r4ds/heights.csv` to
 heights_df <- read.csv("data/r4ds/heights.csv")
