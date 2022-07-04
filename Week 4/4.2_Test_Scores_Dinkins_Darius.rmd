@@ -1,0 +1,87 @@
+---
+title: "4_2"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-07-02'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r }
+# libraries
+library(dplyr)
+library(ggplot2)
+library(pastecs)
+
+# Set the working directory to the root of your DSC 520 directory
+setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
+
+## Load test_scores.csv
+test_scores <- read.csv("data/scores.csv")
+```
+
+ 1. What are the observational units in this study?
+    The observational units are the different recordings of each class. The professor recorded 38 observations
+
+ 2. Identify the variables mentioned in the narrative paragraph and determine which are categorical and       quantitative?
+    The variables are count, score, and section.  Count is quantitative, score is quantitative, and section is categorical
+
+ 3. Create one variable to hold a subset of your data set that contains only the Regular Section and one variable for the Sports Section.
+
+```{r }
+sports <- filter(test_scores, Section == "Sports")
+print(sports)
+
+regular <- filter(test_scores, Section == "Regular")
+print(regular)
+```
+
+4. Use the Plot function to plot each Sections scores and the number of students achieving that score. Use additional Plot Arguments to label the graph and give each axis an appropriate label. 
+    Once you have produced your Plots answer the following questions:
+
+  Comparing and contrasting the point distributions between the two section, 
+  looking at both tendency and consistency: Can you say that one section tended 
+  to score more points than the other? Justify and explain your answer.
+
+The number of students in the regular section scored higher and were more consistent.  
+The regular section has a higher sum than the the sports section.  The data isn't specific to the number of students that scored or the class size in the Count Column.
+The regular section has a higher mean and median which we can use to determine that the regular section has higher test scores
+
+Did every student in one section score more points than every student in the other section?  If not, explain what a statistical tendency means in this context.
+
+No, the regular section had higher scores
+
+What could be one additional variable that was not mentioned in the narrative 
+that could be influencing the point distributions between the two sections?
+
+An additional variable that was not mentioned in the narrative that could be influencing the point distributions between the
+the two sections is class size.
+
+```{r}
+sports_chart <- plot(x = sports$Score, y = sports$Count, main = "Sports", xlab = "Score", ylab = "Number of Students")
+
+regular_chart <- plot(x = regular$Score, y = regular$Count, main = "Regular", xlab = "Score", ylab = "Number of Students")
+
+par(mfcol = c(1,2))
+plot(x = sports$Score, y = sports$Count, main = "Sports", xlab = "Score", ylab = "Number of Students")
+plot(x = regular$Score, y = regular$Count, main = "Regular", xlab = "Score", ylab = "Number of Students")
+
+stat.desc(sports)
+stat.desc(regular)
+
+mean(sports$Score)
+median(sports$Score)
+
+mean(regular$Score)
+median(regular$Score)
+```
+

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(qqplotr)
 
-setwd("C:/Users/darge/dsc520")
+setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
 survey_2014 <- read.csv('acs-14-1yr-s0201.csv')
 
 str(survey_2014)

@@ -1,0 +1,81 @@
+---
+title: "4.2 data transformation"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-07-04'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# libraries
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(pastecs)
+library(readxl)
+library("stringr")
+
+
+#set working directory
+setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
+
+#data set
+housing <- read_excel("data/week-6-housing.xlsx")
+
+```
+1. Use the apply function on a variable in your dataset
+
+```{r }
+apply(X= housing, MARGIN=2, FUN = max)
+```
+2. Use the aggregate function on a variable in your dataset
+
+```{r }
+# Continuous variable first, then categorical variable
+aggregate(sq_ft_lot ~ ctyname, housing, mean)
+```
+
+3. Use the plyr function on a variable in your dataset – more specifically, I want to see you split some data, perform a modification to the data, and then bring it back together
+
+```{r}
+sq_foot_average <- ddply(housing, summarise, .variables = c("ctyname"), sq_average <- mean(sq_ft_lot,na.rm = T))
+sq_foot_average
+
+living_sq_foot_average <- ddply(housing, summarise, .variables = c("ctyname"), living_sq_average <- mean(square_feet_total_living, na.rm = T))
+living_sq_foot_average
+
+combined_sq_foot <- bind_cols(sq_foot_average,living_sq_foot_average)
+
+combined_sq_foot
+
+```
+4. Check distributions of the data
+    sqare foot is positive skewed.  Most of the data resides at the beginning of the distribution
+
+```{r}
+ggplot(housing, aes(x = sq_ft_lot) ) + geom_histogram()
+```
+
+5. Identify if there are any outliers
+
+Yes outliers do exist in this date for sq_ft_lot.  Some variables exceed 100,000 sqare feet!
+```{r}
+ggplot(housing, aes(x = sq_ft_lot) ) + geom_boxplot()
+```
+
+6. Create at least 2 new variables
+
+```{r}
+names(housing)[2] <- 'Sales_Price'
+names(housing)[1] <- 'Sales_Date'
+housing$Column_1 <- "Test_1"
+housing$Column_2 <- "Test_2"
+average_sales_price <- mean(housing$Sales_Price)
+housing_column_names <- colnames(housing)
+
+housing
+
+```
+
