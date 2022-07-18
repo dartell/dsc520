@@ -7,7 +7,7 @@ library(ggplot2)
 theme_set(theme_minimal())
 
 ## Set the working directory to the root of your DSC 520 directory
-setwd("/home/jdoe/Workspaces/dsc520")
+setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
 
 ## Load the `data/r4ds/heights.csv` to
 heights_df <- read.csv("data/r4ds/heights.csv")
