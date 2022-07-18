@@ -1,0 +1,64 @@
+---
+title: "5.2 Exercise"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-07-06'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# libraries
+library(dplyr)
+library(readxl)
+library(purrr)
+library(stringr)
+
+#set working directory
+setwd("C:/Users/darge/OneDrive/Documents/1. Data Science/DSC 520 - Statistics for Data Science/dsc520")
+
+#data set
+housing <- read_excel("data/week-6-housing.xlsx")
+
+```
+
+1. Using either the same dataset(s) you used in the previous weeks’ exercise or a brand-new dataset of your choosing, perform the following transformations (Remember, anything you learn about the Housing dataset in these two weeks can be used for a later exercise!)
+  1. Using the dplyr package, use the 6 different operations to analyze/transform the data - GroupBy, Summarize, Mutate, Filter, Select, and Arrange – Remember this isn’t just modifying data, you are learning about your data also – so play around and start to understand your dataset in more detail
+  
+  2. Using the purrr package – perform 2 functions on your dataset.  You could use zip_n, keep, discard, compact, etc.
+  3. Use the cbind and rbind function on your dataset
+  4. Split a string, then concatenate the results back together
+
+```{r }
+#1
+housing %>% group_by(building_grade) %>% summarise(AvgPrice=mean(`Sale Price`)) %>% arrange(AvgPrice)
+filter(housing, sale_reason == '12' )
+housing%>% slice(1:5)
+housing %>% select(`Sale Price`, sq_ft_lot) %>% mutate(`Sale Price`/sq_ft_lot)
+
+#2
+housing %>% select(`Sale Price`) %>%  map_dbl(sum)
+housing %>% select(`Sale Price`) %>% map(compact)
+
+#3
+housing_2 <- housing
+sale_price_test <-housing %>% select(`Sale Price`)
+cbind_example <- cbind(housing_2, sale_price_test)
+rbind_example <- rbind(housing_2, housing)
+
+#4
+paste("Hello", "Darius", sep = "")
+paste("Hello", "Darius", sep = " ")
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r }
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
