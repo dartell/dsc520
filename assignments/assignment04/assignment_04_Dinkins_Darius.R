@@ -40,11 +40,11 @@ covid_df$date <- ___
 ## Create three dataframes named `california_df`, `ny_df`, and `florida_df`
 ## containing the data from California, New York, and Florida
 california_df <- covid_df[ which( covid_df$state == "California"), ]
-ny_df <- ___
-florida_df <- ___
+ny_df <- covid_df[ which( covid_df$state == "New York"), ]
+florida_df <- covid_df[ which( covid_df$state == "Florida"), ]
 
 ## Plot the number of cases in Florida using `geom_line()`
-ggplot(data=florida_df, aes(x=___, y=___, group=1)) + ___
+ggplot(data=florida_df, aes(x=date, y=cases, group=1)) + geom_line()
 
 ## Add lines for New York and California to the plot
 ggplot(data=___, aes(x=___, group=1)) +
